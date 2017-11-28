@@ -8,9 +8,6 @@ import java.util.Map;
 
 import static java.lang.Math.abs;
 
-/**
- * Created by Christian on 11/20/2017.
- */
 public class AlgMatch {
 
     public ArrayList<ArrayList<Integer>> matchUser(ArrayList<ArrayList<User>> UserLists){
@@ -78,27 +75,7 @@ public class AlgMatch {
                 }
             }
 
-            /*
-        HashMap <User, User> combinedHash = new HashMap<>();
-        combinedHash.putAll(HashB);
-        combinedHash.putAll(HashG);
 
-
-        for (int i = 0; i < 20; i++)
-        {
-            //Log.d("key: ", combinedHash.get(B.get(i)).toString());
-            Log.d("key: ", B.get(i).toString());
-            Log.d("value: ", combinedHash.get(B.get(i)).toString());
-        }
-        for (int i = 0; i < 20; i++)
-        {
-            //Log.d("key: ", combinedHash.get(B.get(i)).toString());
-            Log.d("key: ", G.get(i).toString());
-            Log.d("value: ", combinedHash.get(G.get(i)).toString());
-        }
-
-        return combinedHash;
-*/
         ArrayList<ArrayList<Integer>> matches = new ArrayList<ArrayList<Integer>>();
         ArrayList<Integer> matchedUser1 = new ArrayList<Integer>();
         ArrayList<Integer> matchedUser2 = new ArrayList<Integer>();

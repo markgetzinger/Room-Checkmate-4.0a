@@ -74,8 +74,7 @@ public class CheckMatch extends AppCompatActivity {
         //Log.d("all values:: ", hashyMatchy.toString());
         Log.d("ACTIVE Username :: ", ACTIVE_USER.getUsername());
 
-        //try {
-            Log.d("active user tostr", ACTIVE_USER.toString());
+            Log.d("active user to str", ACTIVE_USER.toString());
             Log.d("Active Index: ", hashyMatchy.get(0).indexOf(ACTIVE_USER.getId())+"");
             User match = new User();
 
@@ -101,37 +100,6 @@ public class CheckMatch extends AppCompatActivity {
 
 
 
-        //}catch(NullPointerException npe){
-            //Log.d("null pointer exception", "::balls.");
-        //}
-        /*
-        //old bullshit
-
-        DBHandler dbHandler = new DBHandler(this);
-        User matchedUser;
-        String pRankSearch = "";
-        Random rand = new Random();
-        TextView matchOut = (TextView) findViewById(R.id.matchDisplay);
-
-        for (int index = 0; index < 4; index++) {
-            pRankSearch += rand.nextInt(4) + 1;
-        }
-
-        Log.d("thePrank:", pRankSearch);
-        //Log.d("currentUser", currentUser.toString())
-        matchedUser = dbHandler.findPrank(pRankSearch);
-        if(matchedUser != null) {
-            //Log.d("found match", (dbHandler.findPrank(pRankSearch)).toString());
-            //matchedUser = (dbHandler.findPrank(pRankSearch));
-            //Log.d("search Return", matchedUser.getUsername());
-
-            matchOut.setText("Youve matched with " + matchedUser.getUsername() + " !");
-        }
-        else{
-            //Log.d("Error in user match","poop");
-
-        }
-        */
 
 }
 
