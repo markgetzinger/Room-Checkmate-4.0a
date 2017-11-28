@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Room-Checkmate</string>
+    <string name="login_button">Login</string>
+    <string-array name="drop1">
+        <item>on-Campus</item>
+        <item>Private</item>
+    </string-array>
+</resources>
