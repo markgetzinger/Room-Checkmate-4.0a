@@ -271,6 +271,8 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
 
+
+
     //TODO
     public boolean deleteUser(String username)
     {
@@ -279,7 +281,127 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
 
+    public ArrayList<User> userSearch(String time, String clean, String sound, String social)
+    {
+        String compareRank = "";
+        switch(time)
+        {
+            case "very early":
+                compareRank += 1;
+                break;
+            case "early":
+                compareRank += 2;
+                break;
+            case "average":
+                compareRank += 3;
+                break;
+            case "late":
+                compareRank += 4;
+                break;
+            case "very late":
+                compareRank += 5;
+                break;
+            default:
+                compareRank += 3;
+                break;
+        }
+        switch(clean)
+        {
+            case "very clean":
+                compareRank += 1;
+                break;
+            case "clean":
+                compareRank += 2;
+                break;
+            case "average":
+                compareRank += 3;
+                break;
+            case "dirty":
+                compareRank += 4;
+                break;
+            case "very dirty":
+                compareRank += 5;
+                break;
+            default:
+                compareRank += 3;
+                break;
+        }
+        switch(sound)
+        {
+            case "very quiet":
+                compareRank += 1;
+                break;
+            case "quiet":
+                compareRank += 2;
+                break;
+            case "average":
+                compareRank += 3;
+                break;
+            case "loud":
+                compareRank += 4;
+                break;
+            case "very loud":
+                compareRank += 5;
+                break;
+            default:
+                compareRank += 3;
+                break;
+        }
+        switch(social)
+        {
+            case "very social":
+                compareRank += 1;
+                break;
+            case "social":
+                compareRank += 2;
+                break;
+            case "average":
+                compareRank += 3;
+                break;
+            case "reserved":
+                compareRank += 4;
+                break;
+            case "antisocial":
+                compareRank += 5;
+                break;
+            default:
+                compareRank += 3;
+                break;
+        }
+        Log.d("captured rank: ", compareRank);
 
+        String query = "Select * FROM " + TABLE_USER_INFORMATION + " WHERE " + KEY_RANKINGS + " = \"" + compareRank + "\"";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        ArrayList<User> foundUsers = new ArrayList<User>();
+        User foundUser;
+
+        while(!cursor.isAfterLast())
+        {
+            foundUser = new User();
+            foundUser.setId(Integer.parseInt(cursor.getString(0)));
+            foundUser.setUsername(cursor.getString(1));
+            foundUser.setPassword(cursor.getString(2));
+            foundUser.setPrank(cursor.getString(3));
+            foundUser.setRankings(cursor.getString(4));
+            foundUser.setFirst_name(cursor.getString(5));
+            foundUser.setLast_name(cursor.getString(6));
+            foundUser.setEmail(cursor.getString(7));
+            foundUser.setPhone(cursor.getString(8));
+            foundUser.setAddress(cursor.getString(9));
+            foundUser.setCity(cursor.getString(10));
+            foundUser.setState(cursor.getString(11));
+            foundUser.setZip(cursor.getString(12));
+            foundUsers.add(foundUser);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        db.close();
+        Log.d("found users", foundUsers.toString());
+        return foundUsers;
+
+    }
 
 
 

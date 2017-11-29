@@ -52,6 +52,7 @@ public class LoginLandingMenu extends AppCompatActivity {
     }
     public void Logout(View view){
         Intent startNewActivity = new Intent(this, Home.class);
+        Home.ACTIVE_USER = null;
         startActivity(startNewActivity);
         this.overridePendingTransition(0, 0);
     }

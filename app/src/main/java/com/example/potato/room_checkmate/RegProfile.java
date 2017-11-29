@@ -7,14 +7,127 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 public class RegProfile extends AppCompatActivity {
+
+    private SeekBar cleanSeekbar;
+    private TextView cleanProgressTextView;
+    private SeekBar timeSeekbar;
+    private TextView timeProgressTextView;
+    private SeekBar socialSeekbar;
+    private TextView socialProgressTextView;
+    private SeekBar soundSeekbar;
+    private TextView soundProgressTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg_profile);
+
+
+
+        //seek bar captures
+
+
+        cleanSeekbar = (SeekBar) findViewById(R.id.cleanBar);
+        cleanProgressTextView = (TextView) findViewById(R.id.cleanPrank);
+        cleanSeekbar.setMax(4);
+        cleanSeekbar.setProgress(0);
+
+        // perform seek bar change listener event used for getting the progress value
+        cleanSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                                               int progressChangedValue = 0;
+                                               public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                                                   progressChangedValue = progress;
+                                               }
+                                               public void onStartTrackingTouch(SeekBar seekBar) {
+                                                   // TODO Auto-generated method stub
+                                               }
+                                               public void onStopTrackingTouch(SeekBar seekBar) {
+                                                   cleanProgressTextView.setText("Cleanliness - "+(progressChangedValue+1));
+                                               }
+        });
+
+
+        timeSeekbar = (SeekBar) findViewById(R.id.timeBar);
+        timeProgressTextView = (TextView) findViewById(R.id.timePrank);
+        timeSeekbar.setMax(4);
+        timeSeekbar.setProgress(0);
+
+        // perform seek bar change listener event used for getting the progress value
+        timeSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            int progressChangedValue = 0;
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                progressChangedValue = progress;
+            }
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
+            }
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                timeProgressTextView.setText("\n\nHours of Activity - "+(progressChangedValue+1));
+            }
+        });
+
+        socialSeekbar = (SeekBar) findViewById(R.id.socialBar);
+        socialProgressTextView = (TextView) findViewById(R.id.socialPrank);
+        socialSeekbar.setMax(4);
+        socialSeekbar.setProgress(0);
+
+        // perform seek bar change listener event used for getting the progress value
+        socialSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            int progressChangedValue = 0;
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                progressChangedValue = progress;
+            }
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
+            }
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                socialProgressTextView.setText("\n\nSociability - "+(progressChangedValue+1));
+            }
+        });
+
+        soundSeekbar = (SeekBar) findViewById(R.id.soundBar);
+        soundProgressTextView = (TextView) findViewById(R.id.soundPrank);
+        soundSeekbar.setMax(4);
+        soundSeekbar.setProgress(0);
+
+        // perform seek bar change listener event used for getting the progress value
+        soundSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            int progressChangedValue = 0;
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                progressChangedValue = progress;
+            }
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
+            }
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                soundProgressTextView.setText("\n\nSound Levels - "+(progressChangedValue+1));
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+        // SPINNER STUFF
+        Spinner spinner = (Spinner) findViewById(R.id.prankSpin);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.prefPrank, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+
 
         //back button
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -93,6 +206,7 @@ public class RegProfile extends AppCompatActivity {
         //user was inserted into database, make sure its there before continuing
         User user2 = db.findUsername(user.getUsername());
         if(user2 != null) {
+            Home.ACTIVE_USER = user2;
             Intent startNewActivity = new Intent(this, LoginLandingMenu.class);
             startActivity(startNewActivity);
             this.overridePendingTransition(0, 0);
